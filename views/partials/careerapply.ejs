@@ -1,0 +1,209 @@
+     <% 
+if(!datas) {}else{
+        %>
+        <div class="wrpsx" style="    position: relative;
+    height: 450px;
+    overflow: hidden; ">
+
+            <div style="position: relative;" class="backgrounds" data-type="background"></div>
+
+            <div class="title_k">
+                <%=terjemahan.KARR%>
+                    <div class="langs">
+                        <ul>
+                            <li><a class="en" href="?clang=en" data-id="En">English</a></li>
+                            <li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+
+        <% } %>
+
+
+            <div class="konten_karir">
+
+                <% 
+if(!datas) {
+        %>
+
+                    <div class="nopage"><i id="fro" class="fa fa-frown-o"></i>
+                        <%=terjemahan.GALAT%>
+                    </div>
+                    <% 
+    }else{
+        %>
+
+                        <% 
+    }
+        %>
+                            <% 
+    if(datas){
+        %>
+                                <%    datas.forEach(function( a ) { 
+%>
+                                    <div class="wrp_cars">
+
+                                        <div class="l_car">
+                                            <div class="title_krs">
+                                                <%= a.nama_karir %>
+                                            </div>
+                                            <div class="time_krs">
+                                                <%= a.tangal_publis %>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="r_car" style="position: relative;">
+                                            <%- a.deskripsi_karir %>
+
+                                        </div>
+
+                                    </div>
+                                    <%
+        })
+        %>
+
+
+                                        <% 
+    }
+    %>
+            </div>
+
+            <div class="formis" style="padding: 20px; text-transform: capitalize;">
+                <form id="subm" action='/postkarir/<%= datas[0].id_karir %>' enctype="multipart/form-data" method="post">
+                      <span class="hpkl" style="    position: relative;
+    display: block;
+    color: #fff;
+    margin-bottom: 50px;
+    font-size: 24px;
+    font-family: sans-serif;"><%=terjemahan.APSS%></span>
+                    <span class="pnwr"> 
+            <i id="wrs" class="fa fa-male"></i>
+        <input type="text" id="nama" maxlength="20" class="n_name" name="nama" placeholder="<%=terjemahan.NAMAS%>">
+            
+        </span>
+                    <span class="pnwr">
+        <span class="hpkl" style="    position: relative;
+    display: block;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 15px; font-family: sans-serif;"><%=terjemahan.JENKA%></span>
+                    <select id="selec" style="padding: 5px; width: 200px;    border-radius: 3px;" name="kategoriartikel"><option value="Pria"><%=terjemahan.MALE%></option><option value="Wanita"><%=terjemahan.WANI%></option></select>
+                    </span>
+                    <span class="pnwr">
+            <i id="wrs" class="fa fa-home"></i>
+                <input id="alamat" type="text" maxlength="50" class="n_alamat" name="alamat" placeholder="<%=terjemahan.ALMATLE%>">
+</span>
+                    <span class="pnwr">
+    <i id="wrs" class="fa fa-phone-square"></i>
+                         <input id="tlp" type="text" maxlength="50" class="n_telepon" name="telpon" placeholder="<%=terjemahan.NOTELPS%>">
+
+    </span>
+                    <span class="pnwr">
+            <i id="wrs" class="fa fa-envelope"></i>
+                <input id="email" type="email" maxlength="50" class="n_email" name="email" placeholder="<%=terjemahan.EMAILS%>">
+</span>
+                    <span class="pnwr">
+    <span class="hpkl" style="    position: relative;
+    display: block;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 15px; font-family: sans-serif;"><%=terjemahan.FILE%></span>
+                        
+<input type="file" name="sampleFiles" id="kum" accept="application/pdf">
+                <input id="text" hidden name="posisi" value="<%= datas[0].nama_karir %>">
+
+    </span>
+                                        <span class="pnwr" id="all_wr">
+
+                     <textarea id="isi_konten" class="editme" name="isi"></textarea>
+
+                                             
+                    </span>
+                    
+                    <div class="progress">
+                                                    <div id="upload-bar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+
+                                                    </div>
+                                                </div>
+                     
+                   <button class="sendme" onclick="submitform()" ><%=terjemahan.KIRLAM%></button>
+                </form>
+            </div>
+
+<script>       
+    function submitform() {
+                            //Do whatever   you want here //... 
+if ($("#nama").val() === '' || $("#tlp").val() === '' || $("#email").val() === '' || $("#alamat").val() === '' || $("#isi_konten").val() === '') {
+                                 
+                             
+            alert('please check your input')
+
+                                return false
+                            }
+                         
+                            
+
+                                if (document.getElementById("subm").files == 0) {
+            alert('please add some document')
+
+                                    return false
+                                } else {
+
+                                    
+                                    $('.overfl').show()
+                                                                        $('.overfl').html('<div class="lds-load"><div></div><div></div><div></div><div></div></div>')
+
+                                    var form = document.getElementById('subm'); // give the form an ID
+                                    var xhr = new XMLHttpRequest(); // create XMLHttpRequest
+                                    var data = new FormData(form); // create formData object
+
+                                    var uploadProgress = document.getElementById('upload-bar');
+                                    var uploadProgress;
+                                    xhr.onload = function() {
+                                        // console.log(this.responseText); // whatever the server returns
+                                        
+                                        
+                                        console.log(this.responseText)
+                                        location.reload();
+  $('.overfl').hide()
+                                      $('.overfl').html('')
+
+                                    }
+
+
+                                    xhr.upload.onloadstart = function(e) {
+                                        uploadProgress.classList.add('visible');
+                                        uploadProgress.setAttribute("aria-valuemin", 0);
+                                        uploadProgress.setAttribute("aria-valuemax", e.total);
+                                        // message.textContent = 'uploading...';
+                                        form.disabled = true;
+                                    };
+
+                                    xhr.upload.onprogress = function(e) {
+
+                                        uploadProgress.setAttribute("aria-valuenow", e.loaded);
+                                        var progress = Math.ceil(((e.loaded) / e.total) * 100);
+                                        // $("#dvProgressPrcent").html(progress + "%");
+                                        uploadProgress.style.width = progress + '%';
+                                        //  uploadProgress.set = e.loaded;
+                                        $('#upload-bar').html(progress + "%");
+                                        uploadProgress.max = e.total;
+                                    };
+
+                                    xhr.upload.onloadend = function(e) {
+                                        uploadProgress.classList.remove('visible');
+                                        // message.textContent = 'complete!';
+                                        form.disabled = false;
+                                    };
+
+
+                                    xhr.open("post", form.action); // open connection
+                                    xhr.send(data);
+                                    // $('#IDModal').modal('toggle');  
+                                
+                            }
+
+                        }; </script>
+<div class="overfl"></div>

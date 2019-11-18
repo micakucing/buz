@@ -1,0 +1,109 @@
+
+    <%- include('m_da') %>
+
+
+<%
+ if(!news){
+        %>
+        <div class="nopage"><i id="fro" class="fa fa-frown-o"></i>
+            <%=terjemahan.GALAT%>
+        </div>
+
+        <%
+    }else{
+        %>
+<style>
+.mappi_c {
+    height: 320px;
+         position: relative;
+     background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(/assetimage/foot.jpg);
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(/assetimage/foot.jpg);
+}
+    
+ 
+ 
+</style>
+ 
+
+<div class="wrpsx" style="    position: relative;
+    height: 350px;
+    overflow: hidden; ">
+     <div style="
+    background: url(/assetimage/grid.png);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+"></div>
+<section class="mappi_c parallax parallax__bg" data-type="background">
+   
+</section>
+     <div class="title_k"><%=terjemahan.ARTI%><div class="langs"><ul><li><a class="en" href="?clang=en" data-id="En">English</a></li><li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li></ul></div></div>
+ </div>
+<div class="minipost" style="padding: 0;">
+    <div class="tutop"><span class="gh"><%=terjemahan.NEAR%></span></div>
+
+   <ul class="content-columns" style="padding-top: 50px;width: 100%; padding: 20px;">
+
+            <% 
+      
+      var i = 0;
+      
+      news.forEach( function( a ) { if(a.judul_atikel === "dummy") {
+    
+}else{
+
+    
+    var ig;
+    var h
+    if(a.gambar_artikel){
+       ig = '/artikelimage/' + a.gambar_artikel;
+        h = ''
+    }else{
+        ig = '/assetimage/noa.jpg';
+      
+    }
+          %>
+
+
+
+
+
+                <li  class="lofi" data-ia="<%= a.id_artikel %>" data-nm="<%= a.judul_atikel %>">
+                    <article class="boxed" style="    box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);">
+                        <img itemprop='image' src="<%= ig %>" alt="<%= a.judul_atikel %>">
+                        <div class="description"  style="overflow: hidden;text-overflow: ellipsis;display: block;white-space: nowrap;">
+                            <h1 itemprop='name'>
+                                <%= a.judul_atikel %>
+                            </h1>
+                            <span itemprop='description' style="display: block;height: 50px;overflow: hidden;">
+                                <%- a.isi_artikel  %>
+                            </span>
+                        </div>
+                    </article>
+                </li>
+
+
+
+
+
+
+
+
+
+
+                <%
+            }
+            })
+          %>
+        </ul>
+
+
+
+
+</div>
+
+ <% } %>
+
+ 

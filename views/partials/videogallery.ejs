@@ -1,0 +1,134 @@
+ 
+<%- include('mv_k') %>
+  
+    <% 
+
+
+    if(!datas){
+        %>
+        <div class="nopage">
+            <%=terjemahan.GALAT%>
+        </div>
+
+        <%
+    }else{
+        %>
+ 
+<div class="wrpsx" style="    position: relative;
+    height: 350px;
+    overflow: hidden; ">
+    <div style="
+    background: url(/assetimage/grid.png);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+"></div>
+<section style="position:relative;  height: 320px;
+    width: 100%;" class="mappi_c parallax parallax__bg" data-type="background">
+   
+</section>
+ 
+        <div class="title_k">
+            <%= title %>
+                <div class="langs">
+                    <ul>
+                        <li><a class="en" href="?clang=en" data-id="En">English</a></li>
+                        <li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+<div class="tutop"><span class="gh" style="line-height: 50px;">   <%= title %> <%= terjemahan.VIDSK %> </span></div>
+            <main class="main" style="padding: 10px;">
+
+
+                <%
+     datas.forEach( function( a ) {
+                    
+     var Youtube = (function () {
+    'use strict';
+
+    var video, results;
+
+    var getThumb = function (url, size) {
+        if (url === null) {
+            return '';
+        }
+        size    = (size === null) ? 'big' : size;
+        results = url.match('[\\?&]v=([^&#]*)');
+        video   = (results === null) ? url : results[1];
+
+        if (size === 'small') {
+            return 'https://img.youtube.com/vi/' + video + '/2.jpg';
+        }
+        return 'https://img.youtube.com/vi/' + video + '/0.jpg';
+    };
+
+    return {
+        thumb: getThumb
+    };
+}());
+    
+      var thumb = Youtube.thumb( a.vurl, 'medium');    
+        %>
+
+                    <figure class="figure1 imghvr-slide-up">
+                        <img class="figure-img" src="<%= thumb %>" alt="<%= a.deskrip %>">
+                        <figcaption class="tp_g">
+                            
+                            <div class="t_ml"><%= a.deskrip %>
+                            
+                            <div class="looksvi" data-vg="<%= a.vurl %>"><%= terjemahan.LIHATV %></div>
+                            </div>
+
+                               
+
+                        </figcaption>
+                    </figure>
+
+
+                    <%
+    }) 
+        
+    %>
+
+            </main>
+            <%
+ }%>
+  <div class="paggbtn_c" style="padding-left: 10px;">
+                <% if (pageCount > 1) { %>
+                    <ul class="pagination">
+                        <% var i = 1;
+	            if (currentPage > 5) {
+	                i = +currentPage - 4;
+	            } %>
+                            <% if (i !== 1) { %>
+                                <li class="disabled" style=" width: 50px;
+    border-radius: 3px;">
+                                    <div data-v="<%= num %>" data-p="1" id="linp">...</div>
+                                </li>
+                                <% } %>
+                                    <% for (i; i<=pageCount; i++) { %>
+                                        <% if (currentPage == i) { %>
+                                            <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span>
+                                            </li>
+                                            <% } else { %>
+                                                <li>
+                                                    <div data-v="<%= num %>" data-p="<%= i %>" id="linv">
+                                                        <%= i %>
+                                                    </div>
+                                                </li>
+                                                <% } %>
+                                                    <% if (i == (+currentPage + 4)) { %>
+                                                        <li class="disabled" style=" width: 50px;
+    border-radius: 3px;">
+                                                            <div id="linp" data-v="<%= num %>" data-p="<%= pageCount %>">...</div>
+                                                        </li>
+                                                        <% break; } %>
+                                                            <% } %>
+
+                    </ul>
+                    <% } %>
+            </div>

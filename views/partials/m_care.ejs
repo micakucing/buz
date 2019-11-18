@@ -1,0 +1,19 @@
+<div class="navkatts" id="burgers">
+   <i id="burger" title="Career menu" class="material-icons">
+sort
+</i>
+</div>
+
+<div id="mydiv" class="list-k_p">
+
+<ul>
+<%
+    kategorikarir.forEach(function( a ) { 
+%>
+    <li class="partikel" data-id="<%= a.id_kategori_karir %>"><span class="tn_k"><span  class="tpls"><%= a.nama_kategori_karir %></span> </span></li>
+    <%
+    })
+%>
+    </ul>
+
+</div>

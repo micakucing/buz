@@ -1,0 +1,244 @@
+<div class="mid_search">
+    <input type="text" class="form-control" name="cari" placeholder="<%=terjemahan.CARI%>">
+    <i id="crs" class="material-icons">search</i>
+
+    <div class="r_cars">
+
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="res_scr">
+            <div class="res_scr_p">
+
+            </div>
+
+            <div class="res_scr_a">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="mid_near_foot_container">
+
+    <div class="tabs_mid_con">
+        <div id="tb" data-res="ar" class="tbs_ms1 lockedtab vg">
+            <i id="tla" class="material-icons">library_books</i>
+
+            <span class="tl"><%=terjemahan.ARTI%></span>
+
+        </div>
+        <div id="tb" data-res="vd" class="tbs_ms2">
+            <i id="tla" class="material-icons">ondemand_video</i>
+
+            <span class="tl">Video</span>
+
+        </div>
+        <div id="tb" data-res="gl" class="tbs_ms3">
+            <i id="tla" class="material-icons">photo_library</i>
+
+            <span class="tl"><%=terjemahan.GAL%></span>
+        </div>
+    </div>
+    <div class="ls_tba">
+        <ul class="content-columns">
+            <% 
+      var i = 0;
+      news.forEach( function( a ) { if(a.judul_atikel === "dummy") {
+    
+}else{
+    
+    var ig;
+    var h
+    if(a.gambar_artikel){
+       ig = '/artikelimage/' + a.gambar_artikel;
+        h = ''
+    }else{
+        ig = '/assetimage/noa.jpg';
+      
+    }
+          %>
+                <li class="frontnews" data-id="<%= a.id_artikel %>" data-nm="<%= a.judul_atikel %>">
+                    <article class="boxed">
+                        <img itemprop="image" src="<%= ig %>" alt="<%= a.judul_atikel %>">
+                        <div class="description"  style="    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;">
+                            <h1  itemprop='name'>
+                                <%= a.judul_atikel %>
+                            </h1>
+                             <span style="display: block;height: 50px; overflow: hidden;" itemprop='description'>
+                                <%- a.isi_artikel	 %>
+                            </span>
+                        </div>
+                    </article>
+                </li>
+
+                <%
+            }
+            })
+          %>
+        </ul>
+    </div>
+    <div class="ls_tbv">
+<% if(!video.length){ %>
+<div class="no_v" style="text-align: center;font-size: 30px;font-family: sans-serif;text-align: center;font-size: 30px;font-family: sans-serif;padding-top: 50px;padding-bottom: 50px;"><%=terjemahan.TTO%></div>
+        
+        
+        
+        
+        <%
+        }else{
+        %>
+        <ul class="content-columns">
+
+            <% 
+      var i = 0;
+      video.forEach( function( a ) { if(a.judul_atikel === "dummy") {
+    
+}else{
+    
+    var ig;
+    var h
+    if(a.gambar_artikel){
+       ig = '/artikelimage/' + a.gambar_artikel;
+        h = ''
+    }else{
+        ig = '/assetimage/noa.jpg';
+    }
+    
+    
+    var Youtube = (function () {
+    'use strict';
+
+    var video, results;
+
+    var getThumb = function (url, size) {
+        if (url === null) {
+            return '';
+        }
+        size    = (size === null) ? 'big' : size;
+        results = url.match('[\\?&]v=([^&#]*)');
+        video   = (results === null) ? url : results[1];
+
+        if (size === 'small') {
+            return 'https://img.youtube.com/vi/' + video + '/2.jpg';
+        }
+        return 'https://img.youtube.com/vi/' + video + '/0.jpg';
+    };
+
+    return {
+        thumb: getThumb
+    };
+}());
+    
+      var thumb = Youtube.thumb( a.uri_video, 'medium');    
+     
+          %>
+                <li class="iframev" data-vg="<%= a.uri_video %>">
+                    <article class="boxed" style="padding: 10px;"> 
+                        
+                      <img itemprop="image" style="border-radius: 3px;" src="<%= thumb %>" alt="<%= a.title_video %>">
+                        
+  <h1 class="hi">
+                                <%= a.title_video %>
+                            </h1>
+                    </article>
+                    
+                </li>
+                
+                <% 
+            }
+            })
+            %>
+        </ul>
+  <% }
+        %>
+    </div>
+
+ 
+
+    <div class="ls_tbg" style="    text-align: center;">
+        <div class="lld">
+            <div class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <ul id="gallery" class="content-columns">
+
+            <% 
+      
+      var i = 0;
+      
+      poto.forEach( function( a ) { if(a.imageuri === "") {
+    
+}else{
+
+    
+    var ig;
+    var h
+   
+    if(a.imageuri){
+       ig = '/potogaleryimage/' + a.imageuri;
+        h = ''
+    }else{
+        ig = '/assetimage/noa.jpg';
+      
+    }
+          %>
+                <li>
+                    <article class="boxed" style="position: relative; max-height: 180px; overflow: hidden;">
+                        <a  class="lop" data-num=<%= i %>  data-caption="<%= a.deskrip %>" data-width="1200" data-height="900" itemprop="count" href="<%= ig %>"  data-gallery="gallery"><i id="plus" class="fa fa-plus"></i><img itemprop="image" style="border-radius: 3px;" src="<%= ig %>" alt="<%= a.deskrip %>"></a>
+
+                    </article>
+                    <a href="#_" class="lightbox" id="img<%= i %>">
+  <img  src="<%= ig %>" alt="<%= a.deskrip %>">
+                     <div class="descriptions">
+                        <h1><%= a.deskrip %></h1>
+                     </div>
+</a>
+                </li>
+
+
+                <% 
+            }
+            i++
+            })
+          %>
+
+
+
+        </ul>
+
+    </div>
+
+
+
+
+
+
+
+
+
+</div>
+<div class="wssp"></div>
+<div class="warp_bottom_mld">
+    <div class="lps1">
+        <%=terjemahan.L1%>
+    </div>
+    <div class="lps2">
+        <%=terjemahan.L2%>
+    </div>
+    <div class="lps3">
+        <%=terjemahan.L3%>
+    </div>
+
+</div>

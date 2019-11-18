@@ -1,0 +1,106 @@
+<header class="head_upper">
+
+    <div class="logo"></div>
+
+    <div class="crom_nav-des">
+
+        <div id="nv_t" class="books <% if (pagename === 'artikel') { %>uls<% } %>" >
+            <i class="material-icons">library_books</i>
+            <%=terjemahan.ARTI%>
+        </div>
+        <div id="nv_t" class="video <% if (pagename === 'video') { %>uls <% } %>" >
+
+            <i class="material-icons">ondemand_video</i> Video
+        </div>
+        <div id="nv_t" class="poto <% if (pagename === 'galery') { %>uls<% } %>" >
+
+            <i class="material-icons">photo_library</i>
+            <%=terjemahan.GAL%>
+
+        </div>
+              
+  
+                <div id="nv_t" class="project <% if (pagename === 'Project') { %>uls<% } %>"  >
+
+            <i class="material-icons">settings</i>
+            <%=terjemahan.PROJECT%>
+
+        </div>
+        
+      
+        
+      
+                <div id="nv_t" class="tentang  <% if (pagename === 'about') { %>uls<% } %>">
+
+            <i class="material-icons">help_outline</i>
+            <%=terjemahan.TEN%>
+
+        </div>
+        
+       
+     
+                <div id="nv_t" class="kontak <% if (pagename === 'kontak') { %>uls<% } %>"  >
+
+            <i class="material-icons">contact_mail</i>
+            <%=terjemahan.KON%>
+
+        </div>
+        
+              <div id="nv_t" class="karir  <% if (pagename === 'karir') { %> uls <% } %>">
+
+<i class="material-icons">
+school
+</i>                <%=terjemahan.KARR%>
+
+        </div>
+        
+    </div>
+
+</header>
+<i id="kums" class="material-icons">more_vert</i>
+
+<div id="mySidenav" class="sidenav">
+    <i id="clo" class="material-icons closebtn">close</i>
+    <div id="nv_ts" class="books">
+        <i id="clos" class="material-icons">library_books</i>
+        <%=terjemahan.ARTI%>
+    </div>
+    <div id="nv_ts" class="video">
+
+        <i id="clos" class="material-icons">ondemand_video</i> Video
+    </div>
+    <div id="nv_ts" class="poto">
+
+        <i id="clos" class="material-icons">photo_library</i>
+        <%=terjemahan.GAL%>
+
+    </div>
+    <div id="nv_ts" class="project">
+
+        <i id="clos" class="material-icons">settings</i>
+        <%=terjemahan.PROJECT%>
+
+    </div>
+    <div id="nv_ts" class="tentang"  <% if (pagename === 'about') { %>style=" color: rgba(255, 255, 255, .80);
+" <% } %>>
+
+        <i id="clos" class="material-icons">help_outline</i>
+        <%=terjemahan.TEN%>
+
+    </div>
+    <div id="nv_ts"  <% if (pagename === 'kontak') { %>style=" color: rgba(255, 255, 255, .80);
+" <% } %> class="kontak">
+
+        <i id="clos" class="material-icons">contact_mail</i>
+        <%=terjemahan.KON%>
+
+    </div>
+  <div id="nv_ts" class="karir" <% if (pagename==='karir' ) { %>style=" border-bottom: 2px solid rgba(0, 0, 0, .50); "
+            <% } %>>
+
+<i id="clos" class="material-icons">
+school
+</i>                <%=terjemahan.KARR%>
+
+        </div>
+</div>

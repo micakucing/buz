@@ -1,0 +1,185 @@
+
+<%- include('m_da') %>
+    <style>
+        .minipost {
+            padding: 20px;
+        }.warp_bottom {
+            top: 50px;
+        }
+    </style>
+    <% 
+    if(!datas){
+        %>
+        <div class="nopage"><i id="fro" class="fa fa-frown-o"></i>
+            <%=terjemahan.GALAT%>
+        </div>
+
+        <%
+    }else{
+        
+          if(datas[0].gambar_artikel){
+       ig = '/artikelimage/' + datas[0].gambar_artikel;
+        h = ''
+    }else{
+        ig = '/assetimage/foot.jpg';
+      
+    }
+        %>
+
+            <style>
+                .mappi_c {
+                    height: 450px;
+                    width: 100%;
+                    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(<%=ig%>);
+                    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(<%=ig%>);
+                    background-size: cover;
+
+                }
+
+            </style>
+            <div class="wrpsx" style="    position: relative;
+    height: 350px;
+    overflow: hidden; ">
+             
+                <div class="mappi_c parallax parallax__bg">
+
+                </div>
+                <div class="title_k">
+                    <%=terjemahan.ARTI%>
+                        <div class="langs">
+                            <ul>
+                                <li><a class="en" href="?clang=en" data-id="En">English</a></li>
+                                <li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+            <div class="miniposted" style="padding-top: 0;">
+                <% 
+      
+      var i = 0;
+      
+      datas.forEach( function( a ) { if(a.judul_atikel === "dummy") {
+    
+}else{
+
+    
+    var ig;
+    var h
+    var b, o, d
+    if(a.size == 0){
+        o = 'cover'
+    }else{
+        o = 'contain'
+    }
+     if(a.gambar_artikel){
+       ig = '/artikelimage/' + a.gambar_artikel;
+        h = ''
+        d= ''
+        b = "<a  class='lop llpx' data-width='1200' data-height='900' itemprop='contentUrl' href='"+ig+"'><div class='imgg' style='background-image: url("+ig+");  background-size:"+o+";'></div></a>";
+    }else{
+        ig = '/assetimage/noa.jpg';
+      b = '';
+      d= a.judul_atikel
+    }
+    
+      if (/^\s*$/.test(a.isi_artikel)) console.log('line is blank');
+
+          %>
+                
+                 <a href="#_" class="lightbox" id="img">
+  <img itemprop='image' src="<%= ig %>" alt="<%= d %>">
+                  
+</a>
+
+
+   
+                    <div class="konten_isi-a"><span class="section_t"><span  itemprop='name' ><%= a.judul_atikel %></span><span class="tglsx" itemProp='datePublished' ><%= a.data_publis %></span></span>
+                        <%- b %>
+                            <div class="wrss" style="color: #565656; font-family: sans-serif;  margin: 20px;word-wrap: break-word;"><article class="isik_s"  itemprop='description' style="line-height: 23px;">
+                                <%-   a.isi_artikel.replace(/\n/g, '<br/>') %></article><span class="pn_s"><%=terjemahan.SUBP %>  <%= a.penulis_artikel %> <p></p></span></div>
+                <div class="shareme" style="    text-align: right;">
+                    <a id="twetb" style="color: #fff;" href="" onclick="window.open(this.href, 'twitter-share','width=580,height=296');return false;">  <i id="xt" class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a class="icon-facebook" style="color: #fff;" id="faceb" href="" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><i id="xb" class="fa fa-facebook" aria-hidden="true"></i></a>
+</div>
+                </div>
+                    <%
+    }
+    })
+    }
+    %>
+                        <%
+     if(!katerelate.length){
+     }else{
+    if(katerelate.length == 1){
+    }else{
+    %>
+                            <span class="top_s-b"><%=terjemahan.OTH%></span>
+                            <%
+    }%>
+                                <ul class="content-columns" style="padding: 8px; width: 100%;">
+                                    <% 
+  
+      var i = 0;
+      
+      katerelate.forEach( function( a ) { if(a.judul_atikel === "dummy") {
+    
+}else{
+
+    
+    var ig;
+    var h
+    if(a.gambar_artikel){
+       ig = '/artikelimage/' + a.gambar_artikel;
+        h = ''
+    }else{
+        ig = '/assetimage/noa.jpg';
+      
+    }
+    
+      if (/^\s*$/.test(a.isi_artikel)) console.log('line is blank');
+
+    
+    if(a.judul_atikel == title){
+        %>
+                                        <%
+    }else{
+    
+          %>
+
+                                            <li class="lofi" data-ia="<%= a.id_artikel %>"  data-nm="<%= a.judul_atikel %>">
+                                                <article class="boxed" style="    box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);">
+                                                    <img src="<%= ig %>" alt="">
+                                                    <div class="description" style="    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;">
+                                                        <h1>
+                                                            <%= a.judul_atikel %>
+                                                        </h1>
+                                                          <span style="display: block;height: 50px;overflow: hidden;">
+                                                            <%- a.isi_artikel %>
+                                                        </span>
+                                                    </div>
+                                                </article>
+                                            </li>
+
+
+
+                                            <%
+          }
+    
+    }
+    })
+          }
+    %>
+                                </ul>
+
+            </div>
+<script>
+var a = document.getElementById('faceb'); 
+a.href = "https://www.facebook.com/sharer/sharer.php?u="+ window.location.href
+    var b = document.getElementById('twetb'); 
+    b.href="https://twitter.com/home?status=Currently reading "+ window.location.href
+
+</script>

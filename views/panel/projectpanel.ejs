@@ -1,0 +1,404 @@
+<%- include('partials/navigation') %>
+
+    <style>
+        .panel-primary>.panel-heading {
+            background-color: #f5f5f5;
+            border-color: #ddd;
+        }
+
+        .panel-primary {
+            border-color: #ddd;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        #btn {
+            margin-bottom: 20px;
+        }
+
+        .nos {
+            text-align: center;
+            font-size: 100px;
+        }
+
+        #bla {
+            background: #ebebeb;
+            width: 50px;
+            right: 15px;
+            top: 10px;
+            height: 50px;
+            position: absolute;
+        }
+
+        .op {
+            font-size: 11px;
+            position: absolute;
+            right: 30px;
+            top: 10px;
+        }
+
+        .plo {
+            width: 100px;
+            white-space: nowrap;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-top: 5px;
+        }
+
+    </style>
+    <div class="well well-sm">
+        <a href="/home/newprojectkontenimage"><button class="btn btn-xs btn-success">
+                                 Add new project
+ 
+                 </button></a>
+                 <div class="tops" style="
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size:  13px;
+    padding-bottom: 10px;
+    background: #dadada;
+">Selalu membuat kategori project baru bila konten project masih kosong</div>
+    </div>
+
+
+    <!-- Static navbar -->
+
+
+    <!--for(var i=0; i< data.length; i++) {  -->
+    <% if (!datas) { %>
+        <div class="nos"></div>
+        <% }else{ 
+    
+    
+    %>
+            <div class="row">
+
+
+                <%  datas.forEach(function( student ) {
+                    
+                    
+     if(student.imgurl){
+       ig = '/projectimage/' +student.imgurl;
+        h = ''
+    }else{
+        ig = '/assetimage/noa.jpg';
+      
+    }
+                    
+                    %>
+                    <div class="col-sm-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"> 
+                                <a href="/home/project-page-data/edit/<%= student.id %> "><button class="btn btn-xs btn-success">
+          Edit
+                                    </button></a>
+                               <a href="/home/addsomeimageproject/delete/<%=student.id %>"><button  data-id="<%=student.id %>" id="databtn"  class="btn btn-xs btn-warning">
+          Delete
+                                </button></a>
+                            </div>
+                            <div class="panel-body"><img src="<%= ig %> " class="img-responsive" style="width:100%" alt="Image"></div>
+                            <div class="panel-footer">
+                                <%= student.titpro %>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal fade" id="myModalHorizontals<%= student.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Edit slide
+                                    </h4>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <form id='uploadForm<%= student.id %>' action='/home/slide/edit' method='post' encType="multipart/form-data">
+
+
+                                    <div class="modal-body">
+                                        <label id="btn" class="btn btn-default">
+    Browse Image<input type="file" name="sampleFile"  data-i="<%= student.id %>" id="fileInput"  accept="image/*" hidden>
+</label>
+
+                                        <span class="op"></span>
+                                        <div class="progress">
+                                            <div id="upload-bar<%= student.id %>" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" hidden name="idtext" value="<%= student.id %>" />
+<input type="text" placeholder="Title slide ..." style="width: 100%;  padding: 10px; margin-bottom: 20px;   resize: none;" name="tits" value="<%= student.title %>" />
+                                            <textarea id="some-textarea<%= student.id %>" name="text" style="width: 100%;  padding: 10px;   resize: none;
+" placeholder="Slide description
+ ..."><%= student.deskrip %></textarea>
+                                            <input type="text" hidden id="fakes<%= student.id %>" name="fakes" />
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Modal Footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancle
+                </button>
+                                        <button type="button" onclick="submitformedit(<%= student.id %>)" id="submit" class="btn btn-default">
+                            Save
+                </button>
+
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% }) %>
+
+            </div>
+            <% } %>
+
+                <% if (pageCount > 1) { %>
+                    <ul class="pagination">
+                        <% var i = 1;
+	            if (currentPage > 5) {
+	                i = +currentPage - 4;
+	            } %>
+                            <% if (i !== 1) { %>
+                                <li class="disabled"><a href="#">...</a></li>
+                                <% } %>
+                                    <% for (i; i<=pageCount; i++) { %>
+                                        <% if (currentPage == i) { %>
+                                            <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span>
+                                            </li>
+                                            <% } else { %>
+                                                <li>
+                                                    <a href="/home/project-page-data/?page=<%= i %>">
+                                                        <%= i %>
+                                                    </a>
+                                                </li>
+                                                <% } %>
+                                                    <% if (i == (+currentPage + 4)) { %>
+                                                        <li class="disabled"><a href="#">...</a></li>
+                                                        <% break; } %>
+                                                            <% } %>
+
+                    </ul>
+                    <% } %>
+
+
+
+
+                        <script>
+                            function submitform() {
+                                //Do whatever   you want here //... 
+
+
+                                if (!$('#some-textareas').val()) {
+
+                                    return
+                                } else {
+
+                                    if (document.getElementById("uploadForms").files == 0) {
+
+                                        return
+                                    } else {
+
+                                        var form = document.getElementById('uploadForms'); // give the form an ID
+                                        var xhr = new XMLHttpRequest(); // create XMLHttpRequest
+                                        var data = new FormData(form); // create formData object
+                                        var uploadProgress = document.getElementById('upload-bar');
+                                        var uploadProgress;
+                                        xhr.onload = function() {
+                                            // console.log(this.responseText); // whatever the server returns
+                                            location.reload();
+
+                                        }
+
+
+                                        xhr.upload.onloadstart = function(e) {
+                                            uploadProgress.classList.add('visible');
+                                            uploadProgress.setAttribute("aria-valuemin", 0);
+                                            uploadProgress.setAttribute("aria-valuemax", e.total);
+                                            // message.textContent = 'uploading...';
+                                            form.disabled = true;
+                                        };
+
+                                        xhr.upload.onprogress = function(e) {
+
+                                            uploadProgress.setAttribute("aria-valuenow", e.loaded);
+                                            var progress = Math.ceil(((e.loaded) / e.total) * 100);
+                                            // $("#dvProgressPrcent").html(progress + "%");
+                                            uploadProgress.style.width = progress + '%';
+                                            //  uploadProgress.set = e.loaded;
+                                            $('#upload-bar').html(progress + "%");
+                                            uploadProgress.max = e.total;
+                                        };
+
+                                        xhr.upload.onloadend = function(e) {
+                                            uploadProgress.classList.remove('visible');
+                                            // message.textContent = 'complete!';
+                                            form.disabled = false;
+                                        };
+
+ 
+                                        xhr.open("post", form.action); // open connection
+                                        xhr.send(data);
+                                        // $('#IDModal').modal('toggle');  
+                                    }
+                                }
+
+                            };
+
+                            function readURL(input) {
+
+                                if (input.files && input.files[0]) {
+                                    var reader = new FileReader();
+
+
+
+                                    reader.onload = function(e) {
+                                        $('#bla').attr('src', e.target.result);
+                                        $('#fake').val(e.target.result)
+                                    }
+
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+
+                            }
+
+                            $("#kum").change(function(e) {
+                                     var fileInput = document.getElementById('kum');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('File is not extensions .jpeg/.jpg');
+        fileInput.value = '';
+        return false;
+    }else{
+                      readURL(this);
+                                }   
+                            });
+
+
+                            function submitformedit(a) {
+                                //Do whatever   you want here //... 
+
+                                if (!$('#some-textarea' + a).val()) {
+
+                                    return
+                                } else {
+
+                                    if (document.getElementById("uploadForm" + a).files == 0) {
+
+                                        return
+                                    } else {
+
+                                        var form = document.getElementById('uploadForm' + a); // give the form an ID
+                                        var xhr = new XMLHttpRequest(); // create XMLHttpRequest
+                                        var data = new FormData(form); // create formData object
+                                        var uploadProgress = document.getElementById('upload-bar' + a);
+                                        var uploadProgress;
+                                        xhr.onload = function() {
+                                            // console.log(this.responseText); // whatever the server returns
+                                            location.reload();
+
+                                        }
+
+
+                                        xhr.upload.onloadstart = function(e) {
+                                            uploadProgress.classList.add('visible');
+                                            uploadProgress.setAttribute("aria-valuemin", 0);
+                                            uploadProgress.setAttribute("aria-valuemax", e.total);
+                                            // message.textContent = 'uploading...';
+                                            form.disabled = true;
+                                        };
+
+                                        xhr.upload.onprogress = function(e) {
+
+                                            uploadProgress.setAttribute("aria-valuenow", e.loaded);
+                                            var progress = Math.ceil(((e.loaded) / e.total) * 100);
+                                            // $("#dvProgressPrcent").html(progress + "%");
+                                            uploadProgress.style.width = progress + '%';
+                                            //  uploadProgress.set = e.loaded;
+                                            $('#upload-bar' + a).html(progress + "%");
+                                            uploadProgress.max = e.total;
+                                        };
+
+                                        xhr.upload.onloadend = function(e) {
+                                            uploadProgress.classList.remove('visible');
+                                            // message.textContent = 'complete!';
+                                            form.disabled = false;
+                                        };
+ 
+
+                                        xhr.open("post", form.action); // open connection
+                                        xhr.send(data);
+                                        // $('#IDModal').modal('toggle');  
+                                    }
+                                }
+                            };
+
+
+
+
+                            function bytesToSize(bytes) {
+                                var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                                if (bytes == 0) return '0 Byte';
+                                var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+                                return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+                            };
+
+     $(document).on("click", "#databtn", function (e) {
+  var tbn = $(this).attr('data-id')
+             $.ajax({
+                     url: '/home/slidepage/delete/' + tbn,
+             type: "GET",
+                     success: function (data) {
+                         
+                         console.log(data)
+                         if(data=='delete'){
+                                                                     location.reload();
+
+                         }
+                     }
+                 
+             })
+                          
+         
+     })
+                            $("body").on('change', '#fileInput', function(e) {
+                                var d = $(this).attr('data-i')
+
+                                if (this.files && this.files[0]) {
+
+                                    var FR = new FileReader();
+
+                                    FR.addEventListener("load", function(e) {
+                                        // console.log(e.target.result)
+
+
+                                        $('#fakes' + d).val(e.target.result)
+
+
+                                    });
+
+                                    FR.readAsDataURL(this.files[0]);
+                                }
+
+                                $('.op').html('Change image with <span class="plo"> file name : ' + this.files.item(0).name + '</span> file size : ' + bytesToSize(this.files.item(0).size));
+                            });
+
+                        </script>
+
+                        <%- include('partials/footer') %>

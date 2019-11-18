@@ -1,0 +1,175 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>xbuz control panel</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/panel/boot.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/lib/jquery.menu-aim.js"></script>
+    <link href="/css/panel/editor.css" type="text/css" rel="stylesheet" />
+    <script src="/lib/main.js"></script>
+    <!-- Resource jQuery -->
+    <link rel="stylesheet" href="/css/panel/style.css">
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="/lib/editor.js"></script>
+
+    <style>
+        .modal-body .form-horizontal .col-sm-2,
+        .modal-body .form-horizontal .col-sm-10 {
+            width: 100%
+        }
+
+        .modal-body .form-horizontal .control-label {
+            text-align: left;
+        }
+
+        .modal-body .form-horizontal .col-sm-offset-2 {
+            margin-left: 15px;
+        }
+        .modal-open .modal {
+        background: rgba(0,0,0, .90);
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header class="cd-main-header">
+        <a href="#0" class="cd-logo"> </a>
+
+        <div class="cd-search is-hidden">
+            <!--<form action="#0">
+				<input type="search" placeholder="Search...">
+			</form>-->
+        </div>
+        <!-- cd-search -->
+
+        <a href="#0" class="cd-nav-trigger"><span></span></a>
+
+        <nav class="cd-nav">
+            <!--<ul class="cd-top-nav">
+				<li><a href="#0">Tour</a></li>
+				<li><a href="#0">Support</a></li>
+				<li class="has-children account">
+					 <a href="#0">
+						<img src="img/cd-avatar.png" alt="avatar">
+						Account
+					</a>
+
+					<ul>
+
+						<li><a href="#0">My Account</a></li>
+						<li><a href="#0">Edit Account</a></li>
+						<li><a href="#0">Logout</a></li>
+					</ul>
+				</li>
+			</ul>-->
+        </nav>
+    </header>
+    <!-- .cd-main-header -->
+
+    <main class="cd-main-content">
+        <nav class="cd-side-nav">
+            <ul>
+                <li class="cd-label">Main Control</li>
+                <li><a href="/home/dashboard">Home</a></li>
+                <!--<ul>
+						<li><a href="#0">All Data</a></li>
+						<li><a href="#0">Category 1</a></li>
+						<li><a href="#0">Category 2</a></li>
+					</ul>-->
+                <li class="has-children notifications active">
+                    <a href="#">Setup Main Panel<!--<span class="count">3</span>--></a>
+                    <ul>
+                        <li><a href="/home/artikel-page-panel">Article data</a></li>
+                        <li><a href="/home/project-page-data">Project data</a></li>
+                        <li><a href="/home/photogalery">Photo gallery data</a></li>
+                                                <li><a href="/home/karir-page-panel">Careers data</a></li>
+
+
+                    </ul>
+                </li>
+                <li class="has-children notifications active">
+                    <a href="#">Setup Categories Panel<!--<span class="count">3</span>--></a>
+
+                    <ul>
+                        <li><a href="/home/kategori-artikel-panel">Categories Artikel</a></li>
+                        <li><a href="/home/kategori-photo-panel">Categories Photo Gallery</a></li>
+                        <li><a href="/home/kategori-project-panel">Categories Project</a></li>
+                                                <li><a href="/home/kategori-karir-panel">Categories Careers</a></li>
+                        <li><a href="/home/kategori-video-panel">Categories Video</a></li>
+
+                    </ul>
+                </li>
+                <li class="has-children comments active">
+                    <a href="#0">Massege Panel</a>
+
+                    <ul>
+                        <li><a href="/home/email-subcribe-panel">Subcribe email</a></li>
+                        <li><a href="/home/kontak-komen-panel">Contact panel</a></li>
+
+
+                        <!--<li><a href="#0">Edit Comment</a></li>
+						<li><a href="#0">Delete Comment</a></li>-->
+                    </ul>
+                </li>
+                <li class="has-children comments active">
+                    <a href="#0">Other Panel</a>
+
+                    <ul>
+                        <li><a href="/home/youtubevideoplayer-panel">Youtube video player</a></li>
+                        <li><a href="/home/profilepage-panel">Company profile</a></li>
+                        <li><a href="/home/historypage-panel">Company history</a></li>
+                        <li><a href="/home/slidepage">Front slide</a></li>
+
+                        <!--<li><a href="#0">Edit Comment</a></li>
+						<li><a href="#0">Delete Comment</a></li>-->
+                    </ul>
+                </li>
+            </ul>
+
+            <!--<ul>
+				<li class="cd-label">Secondary</li>
+				<li class="has-children bookmarks">
+					<a href="#0">Bookmarks</a>
+					
+					<ul>
+						<li><a href="#0">All Bookmarks</a></li>
+						<li><a href="#0">Edit Bookmark</a></li>
+						<li><a href="#0">Import Bookmark</a></li>
+					</ul>
+				</li>
+				<li class="has-children images">
+					<a href="#0">Images</a>
+					
+					<ul>
+						<li><a href="#0">All Images</a></li>
+						<li><a href="#0">Edit Image</a></li>
+					</ul>
+				</li>
+
+				<li class="has-children users">
+					<a href="#0">Users</a>
+					
+					<ul>
+						<li><a href="#0">All Users</a></li>
+						<li><a href="#0">Edit User</a></li>
+						<li><a href="#0">Add User</a></li>
+					</ul>
+				</li>
+			</ul>-->
+
+            <ul>
+                <!--<li class="cd-label">Action</li>-->
+                <li class="action-btn"><a href="/home/logout">Logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-wrapper">

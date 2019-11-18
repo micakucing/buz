@@ -1,0 +1,176 @@
+<%- include('partials/navigation') %>
+    <style>
+        #filter {
+            width: 150px;
+            position: absolute;
+            right: 3px;
+            top: 3px;
+        }
+
+        .well-sm {
+            padding: 9px;
+            position: relative;
+            border-radius: 3px;
+        }
+
+    </style>
+
+    <div class="well well-sm">
+<b> History profile page</b>
+    </div>
+
+
+
+    <div class="modal fade" id="myModalHorizontals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Add new artikel Kategori
+                    </h4>
+
+                </div>
+
+                <!-- Modal Body -->
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="kategoris" value="" />
+                    </div>
+
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancle
+                </button>
+                    <button type="button" class="btn btn-primary" id="submits">
+                   Save
+                </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- Static navbar -->
+
+
+
+
+
+    <ul id="ml" class="list-group">
+
+
+        <!--for(var i=0; i< data.length; i++) {  -->
+        <li class="list-group-item">
+            <form id="hipro">
+                <%
+                                    datas.forEach( function( a ) { %>
+                    <textarea class="postted" name="textme" style="display: none;"><%-  a.isi_h %></textarea>
+                    <input type="text" class="num" hidden name="idnum" value="<%- a.id %>">
+
+                    <textarea class="editme"><%-  a.isi_h  %></textarea>
+
+                    <%
+                
+                })
+                
+                %>
+                        <textarea class="editme"></textarea>
+                        <input type="text" class="len" hidden name="len" value="<%- len %>">
+                        <button type="button" class="btn btn-primary" style="margin-top: 10px;" id="x">
+                   Save
+                </button>
+            </form>
+        </li>
+
+    </ul>
+
+
+
+
+    <script>
+        $(".editme").Editor({
+            'togglescreen': false,
+            'insert_table': false,
+            'print': false,
+            'source': false,
+            'splchars': false,
+            'insert_img': false,
+            'fonts': false,
+            'rm_format': false,
+            'textformats': false,
+            'font_size': false,
+            'actions': false,
+            'insertoptions': false,
+            'extraeffects': false,
+            'advancedoptions': false,
+            'styles': false,
+            'color': false
+ 
+        });
+
+        $(".Editor-editor").html($('.editme').val());
+
+
+
+        (function(d) {
+            var first = d.querySelector('.postted');
+            var second = d.querySelector('.Editor-editor');
+
+            var handler = debounce(function(event) {
+                first.textContent = event.target.textContent;
+
+            }, 500);
+
+            second.addEventListener('input', handler);
+
+            function debounce(func, wait, immed) {
+                var timeout;
+                return function() {
+                    var ctx = this;
+                    var args = arguments;
+                    var later = function() {
+                        timeout = null;
+                        if (!immed) func.apply(ctx, args);
+                    };
+
+                    var callNow = immed && !timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                    if (callNow) func.apply(ctx, args);
+                };
+            }
+        })(document)
+
+
+
+
+        $('#x').on('click', function(e) {
+
+                    $.post("/home/hispropost", //Required URL of the page on server
+{ // Data Sending With Request To Server
+textme: $('.Editor-editor').html(),
+len : $('.len').val(),
+idnum : $('.num').val()
+},
+function(response,status){ // Required Callback Function
+  if (response == 'sukses') {
+
+                                                         location.reload();
+                                  }
+});
+            
+        });
+
+    </script>
+    <%- include('partials/footer') %>

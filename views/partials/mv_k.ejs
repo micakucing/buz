@@ -1,0 +1,28 @@
+<%
+    if(kategorv){ 
+%>
+
+<div class="navkatts" title="Video gallery menu" id="burgers">
+    <i id="burger"  class="material-icons">
+sort
+</i>
+
+</div>
+
+<div id="mydiv" class="list-k_p">
+
+<ul>
+<%
+    kategorv.forEach(function( a ) { 
+%>
+    <li class="pgvideo" data-id="<%= a.id_kat_v %>"><span class="tn_k"><span  class="tpls"><%= a.name_kat_v %></span></span></li>
+    <%
+    })
+%>
+    </ul>
+
+</div>
+
+   <%
+    }else{}
+%>

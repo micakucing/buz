@@ -1,0 +1,96 @@
+<style>
+    .nopage {
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        padding-top: 30px;
+        font-size: 20px;
+    }
+</style>
+<%- include('m_dpro') %>
+  
+    <% 
+
+
+    if(!datas){
+        %>
+        <div class="nopage">
+            <%=terjemahan.GALAT%>
+        </div>
+
+        <%
+    }else{
+        %>
+ <style>
+.mappi_c {
+    height: 320px;
+   position: relative;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(/projectimage/<%= image %>);
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(/projectimage/<%= image %>);
+    background-size: cover;
+
+}
+
+</style>
+<div class="wrpsx" style="position: relative;
+    height: 350px;
+    overflow: hidden; ">
+      <div style="
+    background: url(/assetimage/grid.png);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+"></div>
+    <section class="mappi_c parallax parallax__bg">
+     
+    </section>
+       <div class="title_k">
+            <%=terjemahan.PROJ%>
+                <div class="langs">
+                    <ul>
+                        <li><a class="en" href="?clang=en" data-id="En">English</a></li>
+                        <li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li>
+                    </ul>
+                </div>
+        </div>
+</div>
+<div class="tutop"><span class="gh">   <%= terjemahan.PROY %> </span></div>
+            <main class="main" style="padding: 10px;">
+
+
+                <%
+    datas.forEach(function( a ) { 
+        
+          var ga 
+        if(!a.gambars){
+            ga = '/assetimage/noa.jpg'
+        }else{
+            ga = '/projectimage/' + a.gambars
+        }
+        %>
+
+                    <figure class="figure1 imghvr-slide-up">
+                        <img itemprop='image' class="figure-img" src="<%= ga %>" alt="<%= a.title_produk %>">
+                        <figcaption class="tp_g">
+                            
+                            <div class="t_ml" itemprop='name'><%= a.title_produk %>
+                            
+                            <div class="looks" data-id="<%= a.produk_id %>"><%= terjemahan.LIHAT %></div>
+                            </div>
+
+                               
+
+                        </figcaption>
+                    </figure>
+
+
+                    <%
+    }) 
+        
+    %>
+
+            </main>
+            <%
+ }%>

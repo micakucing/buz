@@ -1,0 +1,552 @@
+<%- include('partials/navigation') %>
+
+    <style>
+        .panel-primary>.panel-heading {
+            background-color: #f5f5f5;
+            border-color: #ddd;
+        }
+
+        .panel-primary {
+            border-color: #ddd;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+
+        ul.list-group li.list-group-item active {
+            background-color: #eee;
+            border-color: #ddd;
+            color: #000;
+
+        }
+
+        .p1,
+        .p2,
+        .p3,
+        .p4,
+        .p5 {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            right: 20px;
+        }
+
+        .modal-footer {
+            padding: 15px;
+            text-align: right;
+            border-top: 1px solid #fff;
+        }
+
+        .ol {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100px;
+            text-align: center;
+    white-space: nowrap;
+        }
+
+        #sukses {
+            display: none;
+        }
+
+        .dropdown-menu>li {
+            display: block;
+            padding: 3px 20px;
+            clear: both;
+            font-weight: 400;
+            line-height: 1.42857143;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .deskrip {
+            display: block;
+            padding-top: 10px;
+            font-size: 13px;
+            word-wrap: break-word;
+            padding-bottom: 20px;
+        }
+
+        #btn {
+            margin-bottom: 20px;
+        }
+
+        .produkname {
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: capitalize;
+            display: block;
+            width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #bla {
+            background: #ebebeb;
+            width: 50px;
+            right: 15px;
+            top: 10px;
+            height: 50px;
+            position: absolute;
+        }
+
+        #tombol {
+            position: absolute;
+            top: 10px;
+            left: 135px;
+        }
+
+        .op {
+            font-size: 11px;
+            position: absolute;
+            right: 30px;
+            top: 10px;
+        }
+
+        .plo {
+            width: 100px;
+            white-space: nowrap;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-top: 5px;
+        }
+
+    </style>
+    <div class="well well-sm">
+        <a href="/home/project-page-data"><button data-toggle="modal" data-target="#myModalHorizontals" class="btn btn-xs btn-success">
+                        Back to project
+          </button></a>
+    </div>
+
+
+    <!-- Static navbar -->
+    <form id='uploadForm' action='/home/editprojectdata/updates' method='post' encType="multipart/form-data">
+        <ul id="ml" class="list-group">
+            <li class="list-group-item active">Panel General</li>
+
+            <li class="list-group-item">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>
+                    </span>
+                                        <input type="text" name="idnumproduk" hidden value="<%= dataproduk[0].produk_id %>">
+
+                    <input type="text" id="produknamea" class="form-control" name="namaproduk" placeholder="Project name" aria-describedby="basic-addon1" value="<%= dataproduk[0].title_produk %>">
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Product Categories
+    <span class="caret"></span>
+  </button>
+                        
+                             <% if(datakategori){
+                            %>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+                        <li role="presentation" class="dropdown-header">Categories Are</li>
+                        <li role="separator" class="divider"></li>
+
+
+                        <%  datakategori.forEach(function( a ) { 
+          
+              if(a.kategori_name === "dummy") {}else{
+
+          %>
+
+                            <li class="katl" data-id="<%= a.id_kategori_p %>" data-kat="<%= a.kategori_name_p %>">
+                                <%= a.kategori_name_p %>
+                            </li>
+
+                            <% } }) %>
+                    </ul>
+                      <% }else{}%>
+                </div>
+                <input type="text" hidden class="blob" name="produkid" value="<% if(datakatpro){ %><%=datakatpro[0].produk_id %><% }else{ %><% } %>" />
+
+                <input type="text" hidden id="sel" name="kategoriproduk" value="<% if(datakatpro){ %><%=datakatpro[0].id_kategori_p %><% }else{ %><% } %>
+" />
+
+
+                <span class="ol"><% if(datakatpro){ %><%=datakatpro[0].kategori_name_p %><% }else{ %><% } %></span>
+
+
+            </li>
+
+          
+            <li class="list-group-item active">Image panel</li>
+            <li class="list-group-item">
+               
+                <% if(!datagambar[0]){  %>
+                    <img  id="gams" class="p1" src="/assetimage/nanya.png">
+                        <button id="tombols"  data-id="<%= dataproduk[0].produk_id %>" type="button" class="btn btn-danger">Add</button>
+
+                    <% }else{%>
+                        <img  id="gams" class="p1" src="/projectimage/<%= datagambar[0].uri_gambar %>">
+                        <button type="button"  id="tombol" onClick="dlte(<%= datagambar[0].id_gambar %>)" class="btn btn-danger">Delete</button>
+
+                        <% }%>
+            </li>
+            <li class="list-group-item">
+                 
+                <% if(!datagambar[1]){ %>
+                    <img  id="gams" class="p2" src="/assetimage/nanya.png">
+                        <button id="tombols"  data-id="<%= dataproduk[0].produk_id %>" type="button" class="btn btn-danger">Add</button>
+
+                    <%}else{%>
+                        <img  id="gams" class="p2" src="/projectimage/<%= datagambar[1].uri_gambar %>">
+                        <button type="button" id="tombol" onClick="dlte(<%= datagambar[1].id_gambar %>)" class="btn btn-danger">Delete</button>
+
+
+                        <% }%>
+            </li>
+            <li class="list-group-item">
+                
+                <% if(!datagambar[2]){ %>
+                    <img  id="gams" class="p3" src="/assetimage/nanya.png">
+                        <button id="tombols"  data-id="<%= dataproduk[0].produk_id %>" type="button" class="btn btn-danger">Add</button>
+
+                    <%}else{ %>
+                        <img id="gams" class="p3" src="/projectimage/<%= datagambar[2].uri_gambar  %>">
+                        <button type="button" id="tombol" onClick="dlte(<%= datagambar[2].id_gambar %>)" class="btn btn-danger">Delete</button>
+
+                        <% }%>
+            </li>
+            <li class="list-group-item">
+               
+                <% if (!datagambar[3]){ %>
+                    <img  id="gams" class="p4" src="/assetimage/nanya.png">
+                        <button id="tombols"  data-id="<%= dataproduk[0].produk_id %>" type="button" class="btn btn-danger">Add</button>
+
+                    <%}else{%>
+                        <img  id="gams" class="p4" src="/projectimage/<%= datagambar[3].uri_gambar  %>">
+                        <button type="button" id="tombol" onClick="dlte(<%= datagambar[3].id_gambar %>)" class="btn btn-danger">Delete</button>
+
+                        <% }%>
+            </li>
+            <li class="list-group-item">
+                
+                <% if(!datagambar[4]){  %>
+                    <img  id="gams" class="p5" src="/assetimage/nanya.png">
+                        <button id="tombols" data-id="<%= dataproduk[0].produk_id %>" type="button" class="btn btn-danger">Add</button>
+
+                    <% }else{ %>
+                        <img  id="gams" class="p5" src="/projectimage/<%= datagambar[4].uri_gambar  %>">
+
+                        <button id="tombol" onClick="dlte(<%= datagambar[4].id_gambar %>)" type="button" class="btn btn-danger">Delete</button>
+
+                        <% }%>
+            </li>
+            <li class="list-group-item">
+                <div class="modal-footer">
+                    <button type="button" id="submit" onclick="submitform()" class="btn btn-primary btn-lg">
+                            Update data
+                </button>
+                </div>
+
+                <div id="sukses" class="alert alert-success" role="alert">
+                    Data sukses di simpan
+                </div>
+            </li>
+        </ul>
+    </form>
+    <script>
+        $('ul.dropdown-menu li.katl').on('click', function() {
+            var getClass = $(this).attr('data-kat');
+            var getid = $(this).attr('data-id');
+
+            $(".ol").text(getClass);
+            $("#sel").val(getid);
+            $(".blob").val(getid);
+
+        });
+
+        function submitform() {
+            //Do whatever   you want here //... 
+            $("#sukses").hide();
+
+            $("#submit").prop('disabled', true);
+            $("#img1").prop('disabled', true);
+            $("#img2").prop('disabled', true);
+            $("#img3").prop('disabled', true);
+            $("#img4").prop('disabled', true);
+            $("#img5").prop('disabled', true);
+
+            $("#dropdownMenu1").prop('disabled', true);
+
+            var form = document.getElementById('uploadForm'); // give the form an ID
+            var xhr = new XMLHttpRequest(); // create XMLHttpRequest
+            var data = new FormData(form); // create formData object
+            var uploadProgress = document.getElementById('upload-bar');
+            var uploadProgress;
+            xhr.onload = function() {
+                // console.log(this.responseText); // whatever the server returns
+
+
+                $("#dropdownMenu1").prop('disabled', false);
+
+                $("#submit").prop('disabled', false);
+                $("#img1").prop('disabled', false);
+                $("#img2").prop('disabled', false);
+                $("#img3").prop('disabled', false);
+                $("#img4").prop('disabled', false);
+                $("#img5").prop('disabled', false);
+
+                $("#sukses").show();
+
+
+            }
+
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    var response = xhr.responseText;
+                    if (xhr.status === 200 && response.status === 'OK') {
+                        console.log('successful');
+                           window.location.href="/home/project-page-data"
+
+                    } else {
+                        console.log('failed');
+                        location.reload()
+
+                    }
+                }
+            }
+
+            xhr.upload.onloadstart = function(e) {
+                uploadProgress.classList.add('visible');
+                uploadProgress.setAttribute("aria-valuemin", 0);
+                uploadProgress.setAttribute("aria-valuemax", e.total);
+                // message.textContent = 'uploading...';
+                form.disabled = true;
+            };
+
+            xhr.upload.onprogress = function(e) {
+
+                uploadProgress.setAttribute("aria-valuenow", e.loaded);
+                var progress = Math.ceil(((e.loaded) / e.total) * 100);
+                // $("#dvProgressPrcent").html(progress + "%");
+                uploadProgress.style.width = progress + '%';
+                //  uploadProgress.set = e.loaded;
+                $('#upload-bar').html(progress + "%");
+                uploadProgress.max = e.total;
+            };
+
+            xhr.upload.onloadend = function(e) {
+                uploadProgress.classList.remove('visible');
+                // message.textContent = 'complete!';
+                form.disabled = false;
+            };
+
+
+
+
+
+            xhr.open("post", form.action); // open connection
+            xhr.send(data);
+            // $('#IDModal').modal('toggle');  
+
+
+        };
+
+
+        function dlte(a) {
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    location.reload()
+                }
+            };
+            xhttp.open("GET", '/home/deletesinglepic/' + a, true);
+            xhttp.send();
+        }
+
+        function readURL1(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.p1').attr('src', e.target.result);
+                    $('#fake1').val(e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        }
+
+        $("#img1").change(function(e) {
+            var filePath = this.value;
+            // var tmppath = URL.createObjectURL(e.target.files[0]);
+
+            var allowedExtensions = /(\.jpg|\.jpeg|)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+
+                return
+            } else {
+                readURL1(this);
+            }
+        });
+
+
+        function readURL2(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.p2').attr('src', e.target.result);
+                    $('#fake2').val(e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        }
+
+        $("#img2").change(function(e) {
+            var filePath = this.value;
+            // var tmppath = URL.createObjectURL(e.target.files[0]);
+
+            var allowedExtensions = /(\.jpg|\.jpeg|)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+
+                return
+            } else {
+                readURL2(this);
+            }
+        });
+
+
+
+     $(document).on("click", "#tombols", function (e) {
+          var tt = $(this).attr('data-id')
+         
+          window.location.href="/home/addsomeimageproject/" + tt;
+        
+     })
+
+
+
+        function readURL3(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.p3').attr('src', e.target.result);
+                    $('#fake3').val(e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        }
+
+        $("#img3").change(function(e) {
+            var filePath = this.value;
+            // var tmppath = URL.createObjectURL(e.target.files[0]);
+
+            var allowedExtensions = /(\.jpg|\.jpeg|)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+
+                return
+            } else {
+                readURL3(this);
+            }
+        });
+
+
+
+
+
+
+        function readURL4(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.p4').attr('src', e.target.result);
+                    $('#fake4').val(e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        }
+
+        $("#img4").change(function(e) {
+            var filePath = this.value;
+            // var tmppath = URL.createObjectURL(e.target.files[0]);
+
+            var allowedExtensions = /(\.jpg|\.jpeg|)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+
+                return
+            } else {
+                readURL4(this);
+            }
+        });
+
+
+        function readURL5(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.p5').attr('src', e.target.result);
+                    $('#fake5').val(e.target.result)
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+
+        }
+
+        $("#img5").change(function(e) {
+            var filePath = this.value;
+            // var tmppath = URL.createObjectURL(e.target.files[0]);
+
+            var allowedExtensions = /(\.jpg|\.jpeg|)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+
+                return
+            } else {
+                readURL5(this);
+            }
+        });
+
+
+        function bytesToSize(bytes) {
+            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+            if (bytes == 0) return '0 Byte';
+            var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+            return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+        };
+
+        document.getElementById('fileInput').onchange = function(e) {
+            if (this.files && this.files[0]) {
+
+                var FR = new FileReader();
+
+                FR.addEventListener("load", function(e) {
+                    // console.log(e.target.result)
+                    $('#fakes').val(e.target.result)
+                });
+
+                FR.readAsDataURL(this.files[0]);
+            }
+
+            $('.op').html('Change image with <p> <span class="plo"> file name : ' + this.files.item(0).name + '</span><br> file size : ' + bytesToSize(this.files.item(0).size));
+        };
+
+    </script>
+
+                        <%- include('partials/footer') %>

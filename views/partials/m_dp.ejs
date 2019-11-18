@@ -1,0 +1,20 @@
+<div class="navkatts"  id="burgers">
+  <i id="burger" title="Photo gallery menu" class="material-icons">
+sort
+</i>
+
+</div>
+
+<div id="mydiv" class="list-k_p">
+
+<ul>
+<%
+    kategoripoto.forEach(function( a ) { 
+%>
+    <li class="pgalleri" data-id="<%= a.id_kategori_poto %>"><span class="tn_k"><span  class="tpls"><%= a.nama_kategori %></span></span></li>
+    <%
+    })
+%>
+    </ul>
+
+</div>

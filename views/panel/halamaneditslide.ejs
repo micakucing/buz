@@ -1,0 +1,279 @@
+<%- include('partials/navigation') %>
+    <style>
+        #filter {
+            width: 150px;
+            position: absolute;
+            right: 3px;
+            top: 3px;
+        }
+
+        .well-sm {
+            padding: 9px;
+            position: relative;
+            border-radius: 3px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        #btn {
+            margin-bottom: 20px;
+        }
+
+        #bla {
+            background: #ebebeb;
+            width: 50px;
+            right: 15px;
+            height: 50px;
+            position: absolute;
+        }
+        .selkat{
+              position: relative;
+    text-align: left;
+    display: block;
+    text-overflow: ellipsis;
+    width: 100px;
+    margin-bottom: 10px;
+        }
+    </style>
+    <div class="well well-sm">
+       
+
+    </div>
+
+ 
+
+
+
+    <% if (message.length > 0) { %>
+        <div class="alert alert-danger col-sm-12">
+            <%= message %>
+        </div>
+        <% } %>
+            <!-- Static navbar -->
+
+
+
+
+
+            <ul id="ml" class="list-group">
+
+
+                <% 
+                var cru, g;
+                datas.forEach( function( student ) { 
+                    if(student.image_slide){
+                        cru = '<img id="imgg" src="/slideimage/'+student.image_slide+'">';
+                        g = 'padding-left: 50px;'
+                    }else{
+                        cru = ''
+                                                g = 'padding-left: 0;'
+
+                    }
+                    
+                    %>
+                    <!--for(var i=0; i< data.length; i++) {  -->
+
+                    <li class="list-group-item">
+
+                        <form id='uploadForms' action='/home/editslideshowposting' name="Form" method='post' encType="multipart/form-data">
+                            <%
+          datas.forEach( function( a ) { %>
+                                <div class="form-group">
+                                    <input type="text" class="form-control a" name="title" id="title" value="<%= a.title_slide %>" placeholder="title" />
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control b" noresize name="deskrip" id="penulis"><%= a.deskrip_slide %></textarea>
+                                </div>
+
+                               
+                                 <div class="form-group">
+
+
+                                   
+                                                <input type="text" hidden id="fake" name="fake" />
+                                                <div class="progress">
+                                                    <div id="upload-bar" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+
+                                                    </div>
+                                                </div>
+                                </div>
+                             
+                              
+                                <input type="text" hidden name="idedit" value="<%= a.id_slide %>" />
+
+
+                                <% })
+     
+     %>
+  <button type="button" class="btn btn-primary" onclick="submitform()" style="margin-top: 20px;" id="submit">
+                   Update
+                </button>
+
+                        </form>
+
+
+                    </li>
+                    <% }) %>
+
+
+            </ul>
+
+
+
+
+            <script>
+                $(".editme").Editor({
+                    'togglescreen': false,
+                    'insert_table': false,
+                    'print': false,
+                    'source': false,
+                    'splchars': false,
+                    'insert_img': false,
+                    'fonts': false,
+                    'rm_format': false,
+                    'textformats': false,
+                    'font_size': false,
+                    'actions': false,
+                    'insertoptions': false,
+                    'extraeffects': false,
+                    'advancedoptions': false,
+                    'styles': false,
+                    'color': false
+
+                });
+                var t = $('.d').val()
+                $(".Editor-editor").html(t);
+
+
+                function myFunction() {
+                    var input, filter, ul, li, a, i;
+                    input = document.getElementById("filter");
+                    filter = input.value.toUpperCase();
+                    ul = document.getElementById("ml");
+                    li = ul.getElementsByTagName("li");
+                    for (i = 0; i < li.length; i++) {
+                        a = li[i];
+                        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            li[i].style.display = "";
+                        } else {
+                            li[i].style.display = "none";
+
+                        }
+                    }
+                }
+             /*   var myEl = document.getElementById('submit');
+
+                $('ul li #submit').on('click', function(e) {
+
+                    var align = $(this).attr('data-id')
+                    var id = $('ul li #kategori' + align).val()
+                    if (id === '') {
+                        return
+                    } else {
+                        $.ajax({
+                            type: "GET",
+                            contentType: "application/json",
+                            url: "/home/edit/kategoriartikelpanel/" + align + "/part/" + id,
+                            success: function(customer) {
+                                location.reload();
+
+                            },
+                            error: function(e) {
+
+                            }
+                        });
+
+                    }
+
+                });
+*/
+
+                function readURL(input) {
+
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+
+
+                        reader.onload = function(e) {
+                            $('#bla').attr('src', e.target.result);
+                            $('#fake').val(e.target.result)
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+
+                }
+
+                $("#kum").change(function(e) {
+                         var fileInput = document.getElementById('kum');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('File is not extensions .jpeg/.jpg/.png');
+        fileInput.value = '';
+        return false;
+    }else{
+                      readURL(this);
+                                }   
+                });
+
+                $('.option').change(function(e) {
+                    var e = document.getElementById("pilih");
+                    var strUser = e.options[e.selectedIndex].text;
+                    var t = e.options[e.selectedIndex].text;
+                    $('.selkat').html(strUser)
+                })
+ 
+
+                function submitform() {
+                     var a=document.forms["Form"]["title"].value;
+       
+        if (a==null || a=="")
+        {
+            
+            return false;
+        }else{
+                                    
+                                    
+                            var form = document.getElementById('uploadForms'); // give the form an ID
+                            var xhr = new XMLHttpRequest(); // create XMLHttpRequest
+                            var data = new FormData(form); // create formData object
+                            var uploadProgress = document.getElementById('upload-bar');
+                            xhr.onload = function() {
+                                // console.log(this.responseText); // whatever the server returns
+                                 location.reload();
+                            }
+                            xhr.upload.onloadstart = function(e) {
+                                uploadProgress.classList.add('visible');
+                                uploadProgress.setAttribute("aria-valuemin", 0);
+                                uploadProgress.setAttribute("aria-valuemax", e.total);
+                                // message.textContent = 'uploading...';
+                                form.disabled = true;
+                            };
+                            xhr.upload.onprogress = function(e) {
+                                uploadProgress.setAttribute("aria-valuenow", e.loaded);
+                                var progress = Math.ceil(((e.loaded) / e.total) * 100);
+                                // $("#dvProgressPrcent").html(progress + "%");
+                                uploadProgress.style.width = progress + '%';
+                                //  uploadProgress.set = e.loaded;
+                                $('#upload-bar').html(progress + "%");
+                                uploadProgress.max = e.total;
+                            };
+                            xhr.upload.onloadend = function(e) {
+                                uploadProgress.classList.remove('visible');
+                                // message.textContent = 'complete!';
+                                form.disabled = false;
+                            };
+                            xhr.open("post", form.action); // open connection
+                            xhr.send(data);
+                            // $('#IDModal').modal('toggle');  
+                         
+                                }
+
+                };
+
+            </script>
+            <%- include('partials/footer') %>

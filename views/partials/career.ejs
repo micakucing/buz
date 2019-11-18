@@ -1,0 +1,54 @@
+ 
+<div class="wrpsx" style="    position: relative;
+    height: 450px;
+    overflow: hidden; ">
+    
+    <div style="position: relative;" class="backgrounds" data-type="background"></div>
+ 
+     <div class="title_k"><%=terjemahan.KARR%><div class="langs"><ul><li><a class="en" href="?clang=en" data-id="En">English</a></li><li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li></ul></div></div>
+</div>
+
+
+
+
+<div class="konten_karir">
+    
+    <% 
+if(!datas) {
+        %>
+    
+    <div class="opening_car"><%=terjemahan.TIK%><div class="tiled_car"><%=terjemahan.NOR%></div></div>
+<% 
+    }else{
+        %>
+    
+<div class="opening_car"><%=terjemahan.TIK%><div class="tiled_car"><%=terjemahan.OR%></div></div>
+<% 
+    }
+        %>
+        <% 
+    if(datas){
+        %>
+    <%    datas.forEach(function( a ) { 
+%>
+        <div class="wrp_cars">
+
+    <div class="l_car">
+       <div class="title_krs"> <%= a.nama_karir %></div>
+               <div class="time_krs"> <%= a.tangal_publis %></div>
+
+        </div>
+    
+        <div class="r_car"> <%- a.deskripsi_karir %></div>
+        
+          </div>
+        <%
+        })
+        %>
+ 
+    
+<% 
+    }
+    %>
+</div>
+ 

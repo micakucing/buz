@@ -1,0 +1,232 @@
+<%- include('partials/navigation') %>
+    <style>
+        #filter {
+            width: 150px;
+            position: absolute;
+            right: 3px;
+            top: 3px;
+        }
+
+        .well-sm {
+            padding: 9px;
+            position: relative;
+            border-radius: 3px;
+        }
+
+    </style>
+    <div class="well well-sm">
+        <button id="tomboltmb" data-toggle="modal" data-target="#myModalHorizontals" class="btn btn-xs btn-success">
+          Add new artikel kategori
+                 </button>
+        <input id="filter" type="text" class="form-control" onkeyup="myFunction()" placeholder="Filter">
+
+    </div>
+
+
+
+    <div class="modal fade" id="myModalHorizontals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Add new artikel Kategori
+                    </h4>
+
+                </div>
+
+                <!-- Modal Body -->
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="kategoris" value="" />
+                    </div>
+
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancle
+                </button>
+                    <button type="button" class="btn btn-primary" id="submits">
+                   Save
+                </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <% if (message.length > 0) { %>
+        <div class="alert alert-danger col-sm-12">
+            <%= message %>
+        </div>
+        <% } %>
+            <!-- Static navbar -->
+
+
+
+
+
+            <ul id="ml" class="list-group">
+
+                <% if (!data) { %>
+                    <li class="list-group-item">No data</li>
+                    <% }else{ %>
+                        <% data.forEach( function( student ) { %>
+                            <!--for(var i=0; i< data.length; i++) {  -->
+
+                            <li class="list-group-item">
+                                <%= student.kategori %> <span class="pull-right">
+        <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#myModalHorizontal<%=student.id%>">Edit</button>
+             <a class="a-inside delete" href="/home/kategoriartikelpanel/delete/<%=student.id%>"> 
+                 <button class="btn btn-xs btn-warning">
+          Delete
+                 </button>
+            </a>
+      </span>
+                                    <div class="modal fade" id="myModalHorizontal<%=student.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel">
+                                                        Edit Kategori
+                                                    </h4>
+                                                </div>
+
+                                                <!-- Modal Body -->
+
+                                                <div class="modal-body">
+
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="kategori<%=student.id%>" value="<%=student.kategori%>" />
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- Modal Footer -->
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancle
+                </button>
+                                                    <button type="button" class="btn btn-primary" id="submit" data-id="<%=student.id%>">
+                   Update
+                </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </li>
+                            <% }) %>
+                                <% } %>
+            </ul>
+
+            <% if (pageCount > 1) { %>
+                <ul class="pagination">
+
+                    <% var i = 1;
+	            if (currentPage > 5) {
+	                i = +currentPage - 4;
+	            } %>
+                        <% if (i !== 1) { %>
+                            <li class="disabled"><a href="#">...</a></li>
+                            <% } %>
+                                <% for (i; i<=pageCount; i++) { %>
+                                    <% if (currentPage == i) { %>
+                                        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span>
+                                        </li>
+                                        <% } else { %>
+                                            <li>
+                                                <a href="/home/kategori/?page=<%= i %>">
+                                                    <%= i %>
+                                                </a>
+                                            </li>
+                                            <% } %>
+                                                <% if (i == (+currentPage + 4)) { %>
+                                                    <li class="disabled"><a href="#">...</a></li>
+                                                    <% break; } %>
+                                                        <% } %>
+
+                </ul>
+                <% } %>
+
+
+
+
+                    <script>
+                        function myFunction() {
+                            var input, filter, ul, li, a, i;
+                            input = document.getElementById("filter");
+                            filter = input.value.toUpperCase();
+                            ul = document.getElementById("ml");
+                            li = ul.getElementsByTagName("li");
+                            for (i = 0; i < li.length; i++) {
+                                a = li[i];
+                                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                    li[i].style.display = "";
+                                } else {
+                                    li[i].style.display = "none";
+
+                                }
+                            }
+                        }
+                        var myEl = document.getElementById('submit');
+
+                        $('ul li #submit').on('click', function(e) {
+
+                            var align = $(this).attr('data-id')
+                            var id = $('ul li #kategori' + align).val()
+                            if (id === '') {
+                                return
+                            } else {
+                                $.ajax({
+                                    type: "GET",
+                                    contentType: "application/json",
+                                    url: "/home/edit/kategoriartikelpanel/" + align + "/part/" + id,
+                                    success: function(customer) {
+                                        location.reload();
+
+                                    },
+                                    error: function(e) {
+
+                                    }
+                                });
+
+                            }
+
+                        });
+
+
+                        $('#submits').on('click', function(e) {
+
+                            var id = $('#kategoris').val()
+                            if (id === '') {
+                                return
+                            } else {
+                                $.ajax({
+                                    type: "GET",
+                                    contentType: "application/json",
+                                    url: "/home/addnew/kategoriartikelpanel/part/" + id,
+                                    success: function(customer) {
+                                        location.reload();
+
+                                    },
+                                    error: function(e) {
+
+                                    }
+                                });
+
+                            }
+
+                        });
+
+                    </script>
+                    <%- include('partials/footer') %>

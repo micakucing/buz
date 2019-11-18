@@ -1,0 +1,158 @@
+<%- include('partials/navigation') %>
+    <style>
+        #filter {
+            width: 150px;
+            position: absolute;
+            right: 3px;
+            top: 3px;
+        }
+
+        .well-sm {
+            padding: 9px;
+            position: relative;
+            border-radius: 3px;
+        }
+
+    </style>
+
+    <div class="well well-sm" style="font-size: 10px;">
+        send mail to <p><b style="font-size: 15px;"> (<%= datas[0].mailuri %>)</b>
+    </div>
+
+
+
+    <div class="modal fade" id="myModalHorizontals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Add new artikel Kategori
+                    </h4>
+
+                </div>
+
+                <!-- Modal Body -->
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="kategoris" value="" />
+                    </div>
+
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancle
+                </button>
+                    <button type="button" class="btn btn-primary" id="submits">
+                   Save
+                </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- Static navbar -->
+
+
+
+
+
+    <ul id="ml" class="list-group">
+
+
+        <!--for(var i=0; i< data.length; i++) {  -->
+        <li class="list-group-item">
+            <form id="copro">
+                <%
+                                    datas.forEach( function( a ) { %>
+                     <input type="text" class="num" hidden name="idnum" value="<%- a.id %>">
+                     <input type="text" class="mails" hidden name="namamail" value="<%- a.mailuri %>">
+   <input class="sub" type="text" name="sub" placeholder="Subject" style="    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #dcd4d4;">
+                    <textarea class="editme"></textarea>
+
+                    <%
+                
+                })
+                
+                %>
+                        <textarea class="editme"></textarea>
+                         <button type="button" class="btn btn-primary" style="margin-top: 10px;" id="x">
+                   Post
+                </button>
+            </form>
+        </li>
+
+    </ul>
+
+
+
+
+    <script>
+        $(".editme").Editor({
+            'togglescreen': false,
+            'insert_table': false,
+            'print': false,
+            'source': false,
+            'splchars': false,
+            'insert_img': false,
+            'fonts': false,
+            'rm_format': false,
+            'textformats': false, 
+            'actions': false,
+            'insertoptions': false,
+            'extraeffects': false,
+            'advancedoptions': false, 
+            'select_all':false,
+            'color': false
+
+
+        });
+
+        $(".Editor-editor").html($('.editme').val());
+ 
+  
+
+
+
+
+        $('#x').on('click', function(e) {
+   
+            $.post("/home/postmailto", //Required URL of the page on server
+                { // Data Sending With Request To Server
+                    textme: $('.Editor-editor').html(),
+                    mails: $('.mails').val() ,
+                    subject: $('.sub').val() 
+                },
+                function(response, status) { // Required Callback Function
+                    if (response == 'sukses') {
+
+                        location.reload();
+                    }
+                });
+            /*      $.ajax({
+             type: "POST",
+             url: '/home/copropost',
+             data: $("#copro").serialize(), // serializes the form's elements.
+             success: function (data) {
+                                  if (data == 'sukses') {
+
+                                                         location.reload();
+                                  }
+             }
+   */
+        });
+
+    </script>
+    <%- include('partials/footer') %>

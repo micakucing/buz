@@ -1,0 +1,115 @@
+<%- include('mv_k') %>
+ 
+<% 
+    if(!datas){
+        %>
+    <div class="nopage"><i id="fro" class="fa fa-frown-o"></i>
+        <%=terjemahan.GALAT%>
+    </div>
+
+    <%
+    }else{
+        %>
+<div class="wrpsx" style=" position: relative;
+    height: 350px;
+    overflow: hidden; ">
+      <div style="
+    background: url(/assetimage/grid.png);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+"></div>
+<section style="position:relative;  height: 320px;
+    width: 100%;" class="mappi_c parallax parallax__bg" data-type="background">
+   
+</section>
+ 
+        <div class="title_k">
+            <%= title %>
+                <div class="langs">
+                    <ul>
+                        <li><a class="en" href="?clang=en" data-id="En">English</a></li>
+                        <li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+    <div class="tutop"><span class="gh"><%=terjemahan.VIDS%></span></div>
+<style>
+    .boxed{
+         width: 350px;
+    }
+    @media (max-width: 800px) {
+        .boxed{
+         width: 100%;
+    }
+    }
+</style>
+<div class="mid_near_foot_container">
+
+    <div class="ls_tbv" style="display: block; padding-top: 30px;">
+
+             <ul class="content-columns" style="width: 100%;">
+
+                <%    
+                
+                    datas.forEach( function( a ) {
+                    
+     var Youtube = (function () {
+    'use strict';
+
+    var video, results;
+
+    var getThumb = function (url, size) {
+        if (url === null) {
+            return '';
+        }
+        size    = (size === null) ? 'big' : size;
+        results = url.match('[\\?&]v=([^&#]*)');
+        video   = (results === null) ? url : results[1];
+
+        if (size === 'small') {
+            return 'https://img.youtube.com/vi/' + video + '/2.jpg';
+        }
+        return 'https://img.youtube.com/vi/' + video + '/0.jpg';
+    };
+
+    return {
+        thumb: getThumb
+    };
+}());
+    
+      var thumb = Youtube.thumb( a.uri, 'medium');    
+ 
+ %>
+
+
+                    <li  class="iframev" data-vg="<%= a.uri %>">
+                        <article class="boxed" style="padding: 10px;">
+
+                            <img style="border-radius: 3px;" src="<%= thumb %>" alt="">
+
+                            <h1 class="hi">
+                                <%= a.title %>
+                            </h1>
+                        </article>
+
+                    </li>
+
+                    <%
+                })
+                %>
+
+            </ul>
+
+ </div>
+</div>
+        <%
+ }
+     
+     %>
+
+ 
+ 

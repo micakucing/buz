@@ -1,0 +1,102 @@
+<%- include('m_dpro') %>
+<%
+ if(!image){
+        %>
+        <div class="nopage">
+           <i id="fro" class="fa fa-frown-o"></i> <%=terjemahan.GALAT%>
+        </div>
+
+        <%
+    }else{
+        %>
+   <div class="wrpsx" style="position: relative;
+    height: 350px;
+    overflow: hidden; ">
+    <section class="mappi_c   parallax parallax__bg">
+     
+    </section>
+       
+<style>
+.mappi_c {
+    height: 320px;
+    width: 100%;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(/projectimage/<%= image[0].uri_gambar %>);
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(/projectimage/<%= image[0].uri_gambar %>);
+    background-size: cover;
+    position:relative;
+
+}
+ 
+</style>
+        <div class="title_k">
+            <%= title %>
+                <div class="langs">
+                    <ul>
+                        <li><a class="en" href="?clang=en" data-id="En">English</a></li>
+                        <li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+
+
+
+<div id="gallery" class="miniposted" style="padding: 10px;">
+    <div  class="p_img">
+                              <a  class="lop llpx" data-caption="" data-width="1200" data-height="900" itemprop="contentUrl"  href="/projectimage/<%= image[0].uri_gambar %>" >
+        <div class="dpv" style="overflow: hidden;
+    max-height: 350px;">
+            
+        <img id="parent_image" src="/projectimage/<%= image[0].uri_gambar %>">
+        </div>
+        </a>
+            <a href="#_" class="lightbox" id="img0">
+  <img itemprop="image" id="lg" src="/projectimage/<%= image[0].uri_gambar %>">
+                     
+</a>
+    <div class="picmi">
+        
+       
+        
+                <%
+        var i = 0;
+    image.forEach(function( a ) { 
+          var ga 
+        if(!a.uri_gambar){
+            ga = '/assetimage/noa.jpg'
+        }else{
+            ga = '/projectimage/' + a.uri_gambar
+        }
+        
+        %>
+<span class="tt_p">
+    
+        <img itemprop="image" class="thumb" data-wt="<%= a.deskrips_pp %>" data-id="<%= i %>"  id="child_image" src="<%= ga  %>"> 
+        </span>
+        
+    
+        
+        <%
+        
+        
+        
+            i++
+            })
+            
+            %>
+        
+        
+        </div>
+    
+    </div>
+    
+    
+    <div class="tp_word">
+    
+    <span class="txt_wra" style="color: #565656; font-size: 15px; font-family:  sans-serif; word-wrap: break-word;"><%-  image[0].deskrips_pp.replace(/\n/g, '<br/>')  %></span>
+    
+    </div>
+</div>
+    <%
+}
+        %>

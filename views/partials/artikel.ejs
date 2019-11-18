@@ -1,0 +1,142 @@
+<style>
+    .mappi_c {
+    height: 320px;
+   position: relative;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(https://www.xbuz.co.id/assetimage/foot.jpg);
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(https://www.xbuz.co.id/assetimage/foot.jpg);
+    background-size: cover;
+
+}
+
+</style>
+    <%- include('m_da') %>
+<div class="minipost" style=" padding: 0;">
+    <%
+     if(!datas){
+        %>
+    <div class="nopage"><i id="fro" class="fa fa-frown-o"></i><%=terjemahan.GALAT%></div>
+
+    <%
+    }else{
+        %>
+    <div class="wrpsx" style="position: relative;
+    height: 350px;
+    overflow: hidden; ">
+         <div style="
+    background: url(/assetimage/grid.png);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+"></div>
+    <div class="mappi_c parallax parallax__bg" >
+    
+</div>
+<div class="title_k"><%=terjemahan.KAR%> <%=title[0].kategori_artikel_nama%><div class="langs"><ul><li><a class="en" href="?clang=en" data-id="En">English</a></li><li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li></ul></div></div>
+    </div>
+   <ul class="content-columns" style="padding-top: 50px;width: 100%; padding: 20px;">
+
+            <% 
+      
+      var i = 0;
+      
+      datas.forEach( function( a ) { if(a.judul_atikel === "dummy") {
+    
+}else{
+
+    
+    var ig;
+    var h
+    if(a.imgurl){
+       ig = 'https://www.xbuz.co.id/artikelimage/' + a.imgurl;
+        h = ''
+    }else{
+        ig = '/assetimage/noa.jpg';
+      
+    }
+          %>
+
+
+
+
+
+                <li class="lofi" data-ia="<%= a.id %>"  data-nm="<%= a.judul %>">
+                    <article class="boxed" style="    box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);">
+                        <img itemprop='image'  src="<%= ig %>" alt="<%= a.judul %>">
+                        <div class="description" style="    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;">
+                            <h1 itemprop='name'>
+                                <%= a.judul %>
+                            </h1>
+                              <span style="display: block;height: 50px;overflow: hidden;" itemprop='description'>
+                                <%- a.isi	 %>
+                            </span>
+                        </div>
+                    </article>
+                </li>
+
+
+
+
+
+
+
+
+
+
+                <%
+            }
+            })
+          %>
+        </ul>
+
+
+
+
+</div>
+
+
+
+
+<% }
+%>
+
+
+
+
+
+
+            <div class="paggbtn_c">
+                <% if (pageCount > 1) { %>
+                    <ul class="pagination">
+                        <% var i = 1;
+	            if (currentPage > 5) {
+	                i = +currentPage - 4;
+	            } %>
+                            <% if (i !== 1) { %>
+                                <li class="disabled" style=" width: 50px;
+    border-radius: 3px;"><div  data-v="<%= num %>" data-p="1" id="linpa">...</div></li>
+                                <% } %>
+                                    <% for (i; i<=pageCount; i++) { %>
+                                        <% if (currentPage == i) { %>
+                                            <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span>
+                                            </li>
+                                            <% } else { %>
+                                                <li>
+                                                    <div  data-v="<%= num %>" data-nm="<%= title[0].kategori_artikel_nama %>" data-p="<%= i %>" id="linpa" >
+                                                        <%= i %>
+                                                    </div>
+                                                </li>
+                                                <% } %>
+                                                    <% if (i == (+currentPage + 4)) { %>
+                                                        <li class="disabled" style=" width: 50px;
+    border-radius: 3px;"><div id="linpa" data-v="<%= num %>" data-p="<%= pageCount %>" >...</div></li>
+                                                        <% break; } %>
+                                                            <% } %>
+
+                    </ul>
+                    <% } %>
+            </div>

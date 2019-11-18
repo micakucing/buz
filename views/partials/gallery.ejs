@@ -1,0 +1,107 @@
+<style>
+  
+    .nopage{
+            width: 100%;
+    text-align: center;
+    color: #fff;
+    padding-top: 30px;
+    font-size: 20px;
+    }
+   
+    
+</style>
+    <%- include('m_dp') %>
+<div class="wrpsx" style="    position: relative;
+    height: 350px;
+    overflow: hidden; ">
+     <div style="
+    background: url(/assetimage/grid.png);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+"></div>
+<section style="position: relative;" class="mappi_c parallax parallax__bg" data-type="background">
+   
+</section>
+     <div class="title_k"><%=terjemahan.GAL%><div class="langs"><ul><li><a class="en" href="?clang=en" data-id="En">English</a></li><li><a class="id" href="?clang=id" data-id="ind">Indonesia</a></li></ul></div></div>
+</div>
+<% 
+
+
+    if(!datas){
+        %>
+    <div class="nopage"><%=terjemahan.GALAT%></div>
+
+    <%
+    }else{
+        %>
+    <div class="tutop"><span class="gh"><%=terjemahan.GALE%></span></div>
+<% 
+
+
+    if(!datas){
+        %>
+<style>
+.mappi_c {
+    height: 320px;
+  
+      height: 320px;
+         position: relative;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(https://www.xbuz.co.id/potogaleryimage/<%= image[0].imageuri %>);
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.9) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, .70) 50%, rgba(0, 0, 0, .80) 90%, rgba(0, 0, 0, 0.9) 100%), url(https://www.xbuz.co.id/potogaleryimage/<%= image[0].imageuri %>);
+    background-size: cover;
+
+}
+ 
+</style>
+ 
+<%
+    }else{
+        %>
+
+        <main id="gallery" class="main" style="padding: 10px;">
+
+
+            <%
+            var i = 0;
+    datas.forEach(function( a ) { 
+        
+        
+        %>
+
+                <figure class="figure1 imghvr-slide-up" >
+                     <a  class="lop" data-num=<%= i %>  data-caption="<%= a.deskrip %>" data-width="1200" data-height="900" itemprop="count" href="https://www.xbuz.co.id/potogaleryimage/<%= a.imageuri %>"  data-gallery="gallery">
+                    <!--<a class="w" href="#img<%= i %>">--><i id="plus" class="fa fa-plus"></i></a>
+                      <img class="figure-img" src="https://www.xbuz.co.id/potogaleryimage/<%= a.imageuri %>">
+                     <figcaption class="tp_g">
+ 
+                         
+                        <!-- <i id="fbs" data-i='/potogaleryimage/<%= a.imageuri %>' data-t='<%= a.deskrip %>' class="fa fa-facebook-square"></i>-->
+                         
+  </figcaption>
+                    
+                </figure>
+<a href="#_" class="lightbox" id="img<%= i %>">
+  <img src="https://www.xbuz.co.id/potogaleryimage/<%= a.imageuri %>">
+                     <div class="descriptions">
+                        <h1><%= a.deskrip %></h1>
+                     </div>
+</a>
+
+                <%
+            i++
+    }) 
+        
+    %>
+
+        </main>
+        <%
+}
+ }%>
+ 
+ 
+ 
+ 
+ 
