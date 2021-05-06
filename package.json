@@ -49,7 +49,7 @@
     "promise-mysql": "^3.2.1",
     "req-flash": "0.0.3",
     "rss": "^1.2.2",
-    "sanitize-html": "^1.18.2",
+    "sanitize-html": "^2.3.2",
     "sendmail": "^1.4.1",
     "sharp": "^0.20.5",
     "sitemap": "^1.13.0",
